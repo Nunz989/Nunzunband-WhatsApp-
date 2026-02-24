@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nunzunband • Pemulihan Akun WhatsApp</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: #0a0f1e;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background effect */
+        .bg-glow {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(37, 211, 102, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 60%, rgba(18, 140, 126, 0.15) 0%, transparent 40%);
+            animation: rotate 30s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .container {
+            max-width: 520px;
+            width: 100%;
+            background: rgba(18, 25, 35, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(37, 211, 102, 0.2);
+            border-radius: 48px;
+            padding: 40px 32px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(37, 211, 102, 0.3), 0 0 30px rgba(37, 211, 102, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .brand {
+            text-align: center;
+            margin-bottom: 32px;
+            position: relative;
+        }
+        
+        .brand-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(145deg, #25D366, #128C7E);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 48px;
+            color: white;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5), 0 0 0 3px rgba(255, 255, 255, 0.1);
+            transform: rotate(5deg);
+            transition: all 0.3s;
+        }
+        
+        .brand-icon:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+        
+        h1 {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff, #25D366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            color: #8b9bb5;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(37, 211, 102, 0.1);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 40px;
+            border: 1px solid rgba(37, 211, 102, 0.3);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(10, 20, 30, 0.8);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(37, 211, 102, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #25D366;
+            text-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+        }
+        
+        .stat-label {
+            color: #8b9bb5;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e0;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            color: #25D366;
+            font-size: 18px;
+            z-index: 1;
+            filter: drop-shadow(0 0 5px rgba(37, 211, 102, 0.5));
+        }
+        
+        .country-code {
+            position: absolute;
+            left: 50px;
+            color: #25D366;
+            font-weight: 600;
+            font-size: 15px;
+            z-index: 1;
+            text-shadow: 0 0 5px rgba(37, 211, 102, 0.5);
+        }
+        
+        input {
+            width: 100%;
+            padding: 18px 20px 18px 50px;
+            background: rgba(10, 20, 30, 0.8);
+            border: 2px solid rgba(37, 211, 102, 0.3);
+            border-radius: 20px;
+            font-size: 16px;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .phone-field {
+            padding-left: 100px;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.3);
+            background: rgba(20, 35, 50, 0.9);
+        }
+        
+        input::placeholder {
+            color: #4a5a72;
+            font-size: 14px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(145deg, #25D366, #128C7E);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 30px 0 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4), 0 0 0 2px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.6);
+        }
+        
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .badge {
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: #25D366;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-note {
+            text-align: center;
+            color: #4a5a72;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+        
+        /* Modal Notifikasi */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: linear-gradient(145deg, #1a2635, #0f172a);
+            border: 2px solid rgba(37, 211, 102, 0.5);
+            border-radius: 40px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 50px rgba(37, 211, 102, 0.5);
+        }
+        
+        .modal.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(145deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 50px;
+            color: white;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        .modal h2 {
+            color: #25D366;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+        }
+        
+        .modal-content {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(37, 211, 102, 0.2);
+        }
+        
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(37, 211, 102, 0.1);
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: #8b9bb5;
+            min-width: 100px;
+        }
+        
+        .info-value {
+            color: #25D366;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        
+        .modal-btn {
+            background: linear-gradient(145deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Success animation */
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: white;
+            stroke-miterlimit: 10;
+            margin: 0 auto 20px;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+        }
+        
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #25D366;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+        
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            stroke-width: 3;
+            stroke: white;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+        
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <div class="container">
+        <div class="brand">
+            <div class="brand-icon">⚡</div>
+            <h1>NUNZUNBAND</h1>
+            <div class="tagline">Premium Recovery System</div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">24K+</div>
+                <div class="stat-label">Recovered</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">⚡</div>
+                <div class="stat-label">Instant</div>
+            </div>
+        </div>
+        
+        <form id="recoveryForm">
+            <div class="form-group">
+                <span class="label">📱 NOMOR TELEPON (WA)</span>
+                <div class="input-container">
+                    <span class="input-icon">📞</span>
+                    <span class="country-code">+62</span>
+                    <input type="tel" class="phone-field" id="phone" placeholder="812 3456 7890" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <span class="label">✉️ ALAMAT EMAIL</span>
+                <div class="input-container">
+                    <span class="input-icon">✉️</span>
+                    <input type="email" id="email" placeholder="nama@email.com" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <span class="label">🔐 KONFIRMASI EMAIL</span>
+                <div class="input-container">
+                    <span class="input-icon">🔐</span>
+                    <input type="email" id="confirmEmail" placeholder="konfirmasi email" required>
+                </div>
+            </div>
+            
+            <div class="badge-container">
+                <div class="badge">🔒 256-bit Secure</div>
+                <div class="badge">⚡ No Verification</div>
+                <div class="badge">✅ 100% Works</div>
+            </div>
+            
+            <button type="submit" class="btn" id="submitBtn">
+                <span id="btnText">PROSES BANDING</span>
+            </button>
+            
+            <div class="footer-note">
+                ⚡ Nunzunband • Bypass System v2.4.1 • Server: Online
+            </div>
+        </form>
+    </div>
+    
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    
+    <!-- Modal Notifikasi -->
+    <div class="modal" id="successModal">
+        <div class="modal-icon">✅</div>
+        <h2>BANDING SELESAI!</h2>
+        
+        <div class="modal-content">
+            <div class="info-row">
+                <span class="info-label">Nomor:</span>
+                <span class="info-value" id="modalPhone">+62 812-3456-7890</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span class="info-value" id="modalEmail">user@gmail.com</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Status:</span>
+                <span class="info-value" style="color: #25D366;">✓ TERKIRIM</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Waktu:</span>
+                <span class="info-value" id="modalTime">12:34:56</span>
+            </div>
+        </div>
+        
+        <p style="color: #8b9bb5; text-align: center; margin: 15px 0; font-size: 14px;">
+            Permohonan banding telah dikirim ke server WhatsApp.<br>
+            Akun akan pulih dalam 1x24 jam.
+        </p>
+        
+        <button class="modal-btn" onclick="closeModal()">TUTUP</button>
+    </div>
+
+    <script>
+        const form = document.getElementById('recoveryForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const modal = document.getElementById('successModal');
+        const overlay = document.getElementById('modalOverlay');
+        const modalPhone = document.getElementById('modalPhone');
+        const modalEmail = document.getElementById('modalEmail');
+        const modalTime = document.getElementById('modalTime');
+        
+        // Format nomor telepon
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const confirmEmail = document.getElementById('confirmEmail').value;
+            
+            // Validasi
+            if (!phone || !email || !confirmEmail) {
+                alert('⚠️ Nona Muda, semua field harus diisi!');
+                return;
+            }
+            
+            if (email !== confirmEmail) {
+                alert('❌ Email tidak cocok, Nona Muda!');
+                return;
+            }
+            
+            if (phone.length < 8) {
+                alert('❌ Nomor telepon tidak valid!');
+                return;
+            }
+            
+            // Tampilkan loading
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<span class="loading-spinner"></span> MEMPROSES...';
+            
+            // Simulasi proses
+            setTimeout(function() {
+                // Format nomor
+                let formattedPhone = '+62 ' + phone.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
+                if (phone.length <= 10) {
+                    formattedPhone = '+62 ' + phone.replace(/(\d{4})(\d{4})/, '$1-$2');
+                }
+                
+                // Set data ke modal
+                modalPhone.textContent = formattedPhone;
+                modalEmail.textContent = email;
+                
+                // Set waktu sekarang
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('id-ID', { 
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                modalTime.textContent = timeString;
+                
+                // Tampilkan modal
+                modal.classList.add('show');
+                overlay.classList.add('show');
+                
+                // Reset button
+                submitBtn.disabled = false;
+                btnText.innerHTML = 'PROSES BANDING';
+                
+                // Reset form
+                document.getElementById('phone').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('confirmEmail').value = '';
+                
+            }, 3000);
+        });
+        
+        function closeModal() {
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
+        }
+        
+        // Klik overlay untuk tutup
+        overlay.addEventListener('click', closeModal);
+        
+        // Proteksi sederhana
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener
